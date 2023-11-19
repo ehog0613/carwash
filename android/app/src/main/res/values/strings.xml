@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_notification_channel_id" translatable="false">carwash_channel_id</string>
+    <string name="client_id">SuPPoCyH3l0GCz9H27ZP</string>
+    <string name="client_secret">vdsizgHhDF</string>
+    <string name="client_name">삐car뻔쩍</string>
+</resources>
