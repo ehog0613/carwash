@@ -66,10 +66,13 @@ class _OrderDetail extends State<ProviderOrderDetail> {
           DefStyle.liBottomLine("기본서비스", order.service.title),
           // DefStyle.liBottomLine("세차종류", order.title),
           order.extra != null && order.extra!.isNotEmpty
-              ? DefStyle.liBottomLineWidget(
-                  "추가서비스",
-                  (order.extra!).map((i) => Text(i.title)).toList(),
-                )
+              ? DefStyle.liBottomLineWidget("추가서비스", [
+                  Text(
+                    (order.extra ?? List.empty())
+                        .map((e) => e.title)
+                        .join(', '),
+                  )
+                ])
               : const SizedBox(height: 0),
           DefStyle.liBottomLine("서비스 금액", curr.format(order.price)),
           order.provider == 0
@@ -147,52 +150,72 @@ class _OrderDetail extends State<ProviderOrderDetail> {
                           DefStyle.liBottomLine(
                               "상태", DefStyle.orderText(order.status)),
                           DefStyle.liBottomLineWidget("진행", <Widget>[
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            DefStyle.okBtn("사진등록", () async {
-                              final returnData = await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => TakePhoto(order.seq)),
-                              );
-                              if (returnData != null) {
-                                setState(() {
-                                  order.photos!.add(returnData);
-                                });
-                              }
-                            }),
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            DefStyle.okBtn("마감처리", () async {
-                              CwDialogs.modalLoading(context, "전송중");
-                              await Api().dio.post(Api.providerOrderStatus,
-                                  data: {
-                                    "seq": order.seq,
-                                    "status": "return"
-                                  }).then((response) {
-                                final Map<String, dynamic> body = response.data;
-                                Navigator.pop(context);
-                                if (response.statusCode == 200 &&
-                                    body["data"] != null) {
-                                  if (mounted) {
-                                    setState(() {
-                                      order.status = body["data"]['status'] ??
-                                          order.status;
-                                    });
-                                  }
-                                }
-                              }).catchError((onError) {
-                                Navigator.pop(context);
-                                if (mounted) {
-                                  CwDialogs.alert(context, "요청중 오류가 발생했습니다.",
-                                      () {
-                                    Navigator.pop(context);
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xff3668AA),
+                              ),
+                              onPressed: () async {
+                                final returnData = await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => TakePhoto(order.seq),
+                                  ),
+                                );
+                                if (returnData != null) {
+                                  setState(() {
+                                    order.photos!.add(returnData);
                                   });
                                 }
-                              });
-                            })
+                              },
+                              child: const Text(
+                                '사진등록',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xff3668AA),
+                              ),
+                              onPressed: () async {
+                                CwDialogs.modalLoading(context, "전송중");
+                                await Api().dio.post(Api.providerOrderStatus,
+                                    data: {
+                                      "seq": order.seq,
+                                      "status": "return"
+                                    }).then((response) {
+                                  final Map<String, dynamic> body = response.data;
+                                  Navigator.pop(context);
+                                  if (response.statusCode == 200 &&
+                                      body["data"] != null) {
+                                    if (mounted) {
+                                      setState(() {
+                                        order.status = body["data"]['status'] ??
+                                            order.status;
+                                      });
+                                    }
+                                  }
+                                }).catchError((onError) {
+                                  Navigator.pop(context);
+                                  if (mounted) {
+                                    CwDialogs.alert(context, "요청중 오류가 발생했습니다.",
+                                            () {
+                                          Navigator.pop(context);
+                                        });
+                                  }
+                                });
+                              },
+                              child: const Text(
+                                '마감처리',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
                           ])
                         ])
                       : DefStyle.liBottomLine(

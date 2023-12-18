@@ -8,7 +8,7 @@ import '../main.dart';
 
 // ignore: must_be_immutable
 class DefAppBar extends StatefulWidget implements PreferredSizeWidget {
-  DefAppBar({Key? key}) : super(key: key);
+  const DefAppBar({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _AppBar();

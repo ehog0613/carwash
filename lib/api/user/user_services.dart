@@ -18,7 +18,7 @@ class UserService {
 
   Future<dynamic> login(String userId, String userPswd, String fcmToken,
       [Position? pos]) async {
-    dynamic _data = {
+    dynamic data = {
       "userId": userId,
       "userPswd": userPswd,
       "fcmToken": fcmToken,
@@ -29,7 +29,7 @@ class UserService {
     // todo : 프로바이더 분리시 호출 주소 변경 처리
     return await Api()
         .dio
-        .post(Api.loginUrl, data: _data)
+        .post(Api.loginUrl, data: data)
         .then((response) async {
       final Map<String, dynamic> body = response.data;
       if (kDebugMode) {
@@ -72,6 +72,7 @@ class UserService {
       "lat": (pos != null) ? pos.latitude : null,
       "lng": (pos != null) ? pos.longitude : null
     };
+    debugPrint("loginSns : $rdata");
     late String loginUrl;
     switch (loginType) {
       case LoginPlatform.kakao:

@@ -642,8 +642,8 @@ class _ServiceDetail extends State<ServiceDetail> {
                         _startDate =
                             DateTime.now().add(const Duration(days: 1));
                         dateState(() {
-                          _firstTime = TimeOfDay(hour: 9, minute: 00);
-                          _lastTime = TimeOfDay(hour: 18, minute: 00);
+                          _firstTime = const TimeOfDay(hour: 9, minute: 00);
+                          _lastTime = const TimeOfDay(hour: 18, minute: 00);
                         });
                       } else {
                         dateState(() {

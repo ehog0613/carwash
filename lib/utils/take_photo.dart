@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:camera/camera.dart';
 import 'package:carwashapp/layout/def_style.dart';
 import 'package:carwashapp/utils/dialogs.dart';
 import 'package:flutter/material.dart';

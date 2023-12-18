@@ -44,7 +44,7 @@ class _ServiceMain extends State<ServiceMainApp>{
   Widget build(BuildContext context) {
     return Scaffold(
         key: scaffoldKey,
-        appBar: DefAppBar(),
+        appBar: const DefAppBar(),
         endDrawer: const RightMenuDrawer(),
         body:
         SafeArea(

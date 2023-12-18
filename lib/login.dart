@@ -318,9 +318,7 @@ class _LoginWidget extends State<LoginWidget> {
   }
 
   void findId() {
-    if (kDebugMode) {
-      print('find id');
-    }
+    Navigator.pushNamed(context, "/findid");
   }
 
   void findPswd() {

@@ -35,6 +35,7 @@ class Api {
   static String providerOrderStatus = "/provider/order/status";
   static String providerOrderPhoto = "/provider/order/upload";
   static String providerPosition = "/provider/position";
+  static String findId = "/auth/search/userid";
 
   final dio = Dio(baseOption);
   final Dio _tokenDio = Dio(BaseOptions(

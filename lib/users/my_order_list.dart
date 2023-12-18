@@ -59,7 +59,7 @@ class _MyOrderList extends State<MyOrderList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DefAppBar(),
+      appBar: const DefAppBar(),
       endDrawer: const RightMenuDrawer(),
       body: RefreshIndicator(
 

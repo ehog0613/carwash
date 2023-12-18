@@ -1,7 +1,6 @@
 import 'dart:core';
 
 import 'package:carwashapp/api/user/carwash_user.dart';
-import 'package:carwashapp/api/user/user_services.dart';
 import 'package:carwashapp/service/items/car_item_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';

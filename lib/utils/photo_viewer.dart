@@ -1,5 +1,4 @@
 import 'package:carwashapp/api/api.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 

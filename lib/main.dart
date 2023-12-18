@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:carwashapp/api/service/model/sys_info.dart';
+import 'package:carwashapp/find_id.dart';
 import 'package:carwashapp/login.dart';
 import 'package:carwashapp/provider/find_order.dart';
 import 'package:carwashapp/provider/provider_order_list.dart';
@@ -218,6 +219,7 @@ class MyApp extends StatelessWidget {
           "/": (context) => const Intro(),
           "/login": (context) => const LoginWidget(),
           "/join": (context) => const JoinWidget(),
+          "/findid": (context) => FindId(),
           "/service": (context) => const ServiceMainApp(),
           "/service/extra": (context) => const ServiceExtra(),
           "/myorder": (context) => const MyOrderList(),
@@ -375,7 +377,7 @@ class _Intro extends State<Intro> {
       _statusText = "이용자 정보 확인";
     });
     Position? pos = _userState.getPosition();
-    dynamic _data = {
+    dynamic data = {
       "fcmToken": _userState.getFcmToken(),
       "lat": pos?.latitude ?? "",
       "lng": pos?.longitude ?? ""
@@ -397,7 +399,7 @@ class _Intro extends State<Intro> {
 
     return await Api()
         .dio
-        .post(Api.userInfonUrl, data: _data)
+        .post(Api.userInfonUrl, data: data)
         .then((response) async {
       if (response.statusCode == 200 && response.data != null) {
         Map<String, dynamic> body = response.data;
